@@ -8,10 +8,7 @@ body{
     align-items: center;
     justify-content: center;
 }
-.header{
-   width: 100%;
-   background-color: black;
-}
+
 .container{
     width: 90vw;
     width: clamp(16rem, 90vw, 70rem);
@@ -58,10 +55,11 @@ main img{
     height: 200px;
     border-radius: 50%;
     margin: 10px;
+    margin-right: 7rem
 }
 main h3, main h2 , main p{
     font-family: sans-serif;
-    margin: 5px 0;
+    margin-right: 7rem;
 }
 main a {
   color: black;
