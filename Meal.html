@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,39 +15,34 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="style.css">
-    
-    <title>Github Profiles</title>
+    <title>Meal</title>
 </head>
-
 <body>
-
     <div class="container">
-    
-        <nav class="navbar navbar-expand-lg navbar-white bg-dark">
-            <a class="navbar-brand" href="index.html">Home</a>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="Meal.html"> Meal<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Movie</a>
-                </li>
-            </ul>
-        </nav>
-    
-        <h1 style="font-family: sans-serif; margin-top:10px;margin-right:7rem;">Github Profile</h1>
-        <form action="">
-            <input id="search" type="search" placeholder="Search here...">
-            <button id="searchBtn">Search</button>
-        </form>
-        <main>
-            <h1>Search for a Github Profile ! </h1>
-            
-        </main>
-    </div>
+      <nav class="navbar navbar-expand-lg navbar-white bg-dark">
+        <a class="navbar-brand" href="index.html">Home</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="Meal.html"> Meal<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Movie</a>
+            </li>
+        </ul>
+    </nav>
+        <div class="row">
+          <h3 class="heading">
+            Feeling hungry?
+          </h3>
+          <h5>Get a random meal by clicking below</h5>
+          <button class="button-primary" id="get_meal">Get Meal 🍔</button>
+      
+        </div>
+        <div id="meal" class="row meal"></div>
+      </div>
 
-    <script src="main.js"></script>
+<script src="main.js"></script>
 </body>
-
 </html>

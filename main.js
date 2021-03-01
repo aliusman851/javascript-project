@@ -1,4 +1,4 @@
-"use strict"
+
 const apiUrl = 'https://api.github.com/users/';
 const main = document.querySelector('main');
 const search = document.querySelector('#search');
@@ -8,8 +8,10 @@ const img = document.createElement('img');
 const h3 = document.createElement('h3');
 const h2 = document.createElement('h2');
 const p = document.createElement('p');
+const p1 = document.createElement('h4');
 
-
+const catcherror ="error big error again erro";
+try {
 // The search form .
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -21,6 +23,12 @@ form.addEventListener("submit", (e) => {
         search.value = "";
     }
 });
+} catch {
+    p1.innerHTML=catcherror;
+}
+
+
+   
 // Fteching Data from the Api.
 function searchProfile(url){
     fetch(url)
@@ -33,6 +41,7 @@ function searchProfile(url){
             main.appendChild(h3);
             main.appendChild(h2);
             main.appendChild(p);
+            main.appendChild(p1);
             
             img.src = `${data.avatar_url}`
             // Putting the Api data on the elements.
@@ -40,46 +49,63 @@ function searchProfile(url){
             h2.innerHTML = ` Name : ${data.name}`
             p.innerHTML = `Bio : ${data.bio}`
         });
-    }
-    searchInstagram();
-    document.querySelector('.search-input').addEventListener('keyup', function(e) {
-        //if(e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode >= 65 && e.keyCode <= 90 || e.keyCode >= 97 && e.keyCode <= 122 || e.keyCode == 8)
-        searchInstagram();
-    })
     
-    function searchInstagram() {
-        //Search Instagram Accounts
-        fetch(`https://www.instagram.com/web/search/topsearch/?&query=${document.querySelector('.search-input').value}`)
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            document.querySelector('.results .ig').innerHTML = "";
-            for(let i in data.users){
-                let userData = data.users[i].user;
+}
+
+
     
-                let user = `<div class="user">
-                    <div class="image-holder">
-                        <img src="${userData.profile_pic_url}" />
-                    </div>
-                    <div class="user-account-info">
-                        <div class="user-display-name">${userData.full_name}</div>
-                        <div class="user-name">@${userData.username}</div>
-                    </div>
-                    <abbr title="Open @${userData.username}'s account" class="fas fa-external-link-alt" onclick="window.open('https://instagram.com/${userData.username}')"></abbr>
-                </div>`;
+   const get_meal_btn = document.getElementById('get_meal');
+   const meal_container = document.getElementById('meal');
+   
+   get_meal_btn.addEventListener('click', () => {
+     fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+       .then(res => res.json())
+       .then(res => {
+       createMeal(res.meals[0]);
+
+     });
+   });
     
-                document.querySelector('.results .ig').innerHTML += user;
-            }
-        })
-    }
-    
-    function changeTab(e) {
-        document.querySelectorAll('.tabs div').forEach(item => {
-            item.classList.remove('selected');
-        })
-        document.querySelectorAll('.results div').forEach(item => {
-            item.classList.remove('open');
-        })
-        e.classList.add('selected');
-    }
+   const createMeal = (meal) => {
+     const ingredients = [];
+     // Get all ingredients from the object. Up to 20
+     for(let i=1; i<=20; i++) {
+       if(meal[`strIngredient${i}`]) {
+         ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`)
+       } else {
+         // Stop if no more ingredients
+         break;
+       }
+     }
+     
+     const newInnerHTML = `
+       <div class="row">
+         <div class="columns five">
+           <img src="${meal.strMealThumb}" alt="Meal Image">
+           ${meal.strCategory ? `<p><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
+           ${meal.strArea ? `<p><strong>Area:</strong> ${meal.strArea}</p>` : ''}
+           ${meal.strTags ? `<p><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
+           <h5>Ingredients:</h5>
+           
+             ${ingredients.map(ingredient => `${ingredient}`).join('')}
+           
+         </div>
+         <div class="columns seven">
+           <h4>${meal.strMeal}</h4>
+           <p>${meal.strInstructions}</p>
+         </div>
+       </div>
+       ${meal.strYoutube ? `
+       <div class="row">
+         <h5>Video Recipe</h5>
+         <div class="videoWrapper">
+           <iframe width="420" height="315"
+           src="https://www.youtube.com/embed/${meal.strYoutube.slice(-11)}">
+           </iframe>
+         </div>
+       </div>` : ''}
+     `;
+     
+     meal_container.innerHTML = newInnerHTML;
+   }
+   
