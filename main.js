@@ -1,4 +1,4 @@
-
+"use strict"
 const apiUrl = 'https://api.github.com/users/';
 const main = document.querySelector('main');
 const search = document.querySelector('#search');
@@ -8,9 +8,12 @@ const img = document.createElement('img');
 const h3 = document.createElement('h3');
 const h2 = document.createElement('h2');
 const p = document.createElement('p');
-const p1 = document.createElement('h4');
+// Get elementbyID 
+const get_meal_btn = document.getElementById('get_meal');
+const meal_container = document.getElementById('meal');
+   
 
-const catcherror ="error big error again erro";
+
 try {
 // The search form .
 form.addEventListener("submit", (e) => {
@@ -21,19 +24,20 @@ form.addEventListener("submit", (e) => {
     if (searchTerm) {
         searchProfile(apiUrl + searchTerm);
         search.value = "";
+    }else{
+      p.innerHTML=`Error:${"Please give the valid id"}`
     }
 });
-} catch {
-    p1.innerHTML=catcherror;
+}catch (err) {
+  p.innerHTML=err.message;
+
 }
-
-
    
 // Fteching Data from the Api.
 function searchProfile(url){
     fetch(url)
     .then(res => res.json())
-    .then(function(data){
+    .then(data =>{
         
         
 // Appending those Elements to the main Element.
@@ -41,7 +45,7 @@ function searchProfile(url){
             main.appendChild(h3);
             main.appendChild(h2);
             main.appendChild(p);
-            main.appendChild(p1);
+            //main.appendChild(p1);
             
             img.src = `${data.avatar_url}`
             // Putting the Api data on the elements.
@@ -54,9 +58,7 @@ function searchProfile(url){
 
 
     
-   const get_meal_btn = document.getElementById('get_meal');
-   const meal_container = document.getElementById('meal');
-   
+   try {
    get_meal_btn.addEventListener('click', () => {
      fetch('https://www.themealdb.com/api/json/v1/1/random.php')
        .then(res => res.json())
@@ -65,6 +67,9 @@ function searchProfile(url){
 
      });
    });
+  }catch {
+    p.innerHTML=`Error:${"Please give the valid id"}`
+}
     
    const createMeal = (meal) => {
      const ingredients = [];
@@ -73,7 +78,7 @@ function searchProfile(url){
        if(meal[`strIngredient${i}`]) {
          ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`)
        } else {
-         // Stop if no more ingredients
+         //Stop if no more ingredients
          break;
        }
      }
@@ -81,7 +86,8 @@ function searchProfile(url){
      const newInnerHTML = `
        <div class="row">
          <div class="columns five">
-           <img src="${meal.strMealThumb}" alt="Meal Image">
+           <img class="img-fluid
+           " src="${meal.strMealThumb}" alt="Meal Image">
            ${meal.strCategory ? `<p><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
            ${meal.strArea ? `<p><strong>Area:</strong> ${meal.strArea}</p>` : ''}
            ${meal.strTags ? `<p><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
