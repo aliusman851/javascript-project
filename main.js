@@ -1,5 +1,5 @@
 "use strict"
-// Global variabler av Github Api
+// Global variabler av Github Api and other api:er
 const apiUrl = 'https://api.github.com/users/';
 const main = document.querySelector('main');
 const search = document.querySelector('#search');
@@ -29,9 +29,8 @@ const moviesearch = document.getElementById("moviesearch");
 
 try {
   // The search form .
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    main.innerHTML = '';
+  form.addEventListener("submit", () => {
+  main.innerHTML = '';
     let searchTerm;
     if (search != null) {
       searchTerm = search.value;
@@ -137,8 +136,7 @@ const createMeal = (meal) => {
 
 // Form submit event to search the required movie
 try {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  form.addEventListener("submit", () => {
     main.innerHTML = '';
     let searchmovie;
     if (moviesearch != null) {

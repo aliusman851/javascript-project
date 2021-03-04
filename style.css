@@ -9,7 +9,6 @@ body{
   justify-content: center;
   
 }
-
 .container{
     width: 90vw;
     width: clamp(16rem, 90vw, 70rem);
@@ -48,7 +47,6 @@ form button{
 main{
     padding: 10px;
     display: flex;
-    
     align-items: center;
     width: 100%;
     display: flex;
@@ -81,8 +79,6 @@ header h1{
     margin: 0 20px;
     color: #fff;
 }
-
-
 #moviesearch{
     width: 230px;
     height: 30px;
@@ -98,7 +94,6 @@ header h1{
     background: hsl(133, 100%, 50%);
     
 }
-
 h2{
     font-size: 20px;
     font-family: sans-serif;
