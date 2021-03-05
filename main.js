@@ -29,7 +29,8 @@ const moviesearch = document.getElementById("moviesearch");
 
 try {
   // The search form .
-  form.addEventListener("submit", () => {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
   main.innerHTML = '';
     let searchTerm;
     if (search != null) {
@@ -136,7 +137,8 @@ const createMeal = (meal) => {
 
 // Form submit event to search the required movie
 try {
-  form.addEventListener("submit", () => {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
     main.innerHTML = '';
     let searchmovie;
     if (moviesearch != null) {
